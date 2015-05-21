@@ -1,6 +1,7 @@
 #ifndef LM_SEARCH_TRIE__
 #define LM_SEARCH_TRIE__
 
+#include "lm/binary_format.hh"
 #include "lm/config.hh"
 #include "lm/model_type.hh"
 #include "lm/return.hh"
@@ -110,7 +111,7 @@ template <class Quant, class Bhiksha> class TrieSearch {
   private:
     friend void BuildTrie<Quant, Bhiksha>(const std::string &file_prefix, std::vector<uint64_t> &counts, const Config &config, TrieSearch<Quant, Bhiksha> &out, Quant &quant, const SortedVocabulary &vocab, Backing &backing);
 
-    // Middles are managed manually so we can delay construction and they don't have to be copyable.  
+    // Middles are managed manually so we can delay construction and they don't have to be copyable.
     void FreeMiddles() {
       for (const Middle *i = middle_begin_; i != middle_end_; ++i) {
         i->~Middle();
